@@ -41,7 +41,6 @@ def register():
         user.name = request.form['name']
         user.email = request.form['email']
         password = request.form['password']
-        error = None
         # Check if the email is already registered
         if User.query.filter_by(email=user.email).first():
             flash("You've already signed up with that email, log in instead!", 'error')
@@ -63,7 +62,6 @@ def register():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    error = None
     if request.method == "POST":
         existing_user = User.query.filter_by(email=request.form['email']).first()
         if existing_user:
